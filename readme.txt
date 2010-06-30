@@ -17,7 +17,6 @@ Features:
    2. Users can display image ads, input their own <HTML> codes (with admin verification), or accept donations by entering their Paypal account. With respect to image ads, users can also specify a time limit until the advertisement expires.
    3. As an added layer of security, the plugin will not be seen by users with a subscriber status. Since users with the power to post on your blog are typically trusted, the worry of misuse should be minimized. Despite this, we have sanitized all the inputs besides the Code textarea. To eliminate it’s misuse, the field is disabled until access is granted by an administrator.
 
-
 == Installation ==
 
 Installation
@@ -46,8 +45,7 @@ We encourage modification and redistribution of the code as long as it remains f
 
 == Screenshots ==
 
-1. This image displays the settings that can be configured through the administrative panel. Normal subscribers cannot see these settings. `/tags/1.0/screenshot-1.gif`
-
+1. This image displays the settings that can be configured through the administrative panel. Normal subscribers cannot see these settings.
 
 == Changelog ==
 
