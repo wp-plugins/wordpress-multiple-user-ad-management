@@ -46,7 +46,8 @@ We encourage modification and redistribution of the code as long as it remains f
 
 == Screenshots ==
 
-1. This image displays the settings that can be configured through the administrative panel. Normal subscribers cannot see these settings.
+1. This image displays the settings that can be configured through the administrative panel. Normal subscribers cannot see these settings. `/tags/1.0/screenshot-1.gif`
+
 
 == Changelog ==
 
