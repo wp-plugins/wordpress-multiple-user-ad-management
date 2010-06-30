@@ -21,9 +21,16 @@ Features:
 
 == Installation ==
 
+Installation
+
 1. Without changing anything (Not even the folder name), place the extracted multiauthor folder into the `/wp-content/plugins/` directory of your WordPress installation.
 2. Login to the administrative panel of the WordPress installation and activate the plugin. At this point in time, a MU Ad management option should appear on the admin navigation bar. This option will be visible to authors on your blog as well.
 3. In order to actually display the ads, we need to call the function: `<?php mu_sidebar(get_the_author_id()); ?>`. Wherever this function is placed, the ad will show. As you may be able to tell, on Ravall.com we have included this function at the bottom of the sidebar.
+
+Configuration 
+
+1. The first thing we need to configure is, the maximum size of custom (image) ads allowed. To do so, open the file, adminpanel.php and edit the variables, `$maximagewidth & $maximageheight`. The default values for these two variables are 152X172. Users will not be able to link to image files that are larger than the maximum restriction set by these two variables.
+2. All the actual outputting is done by 'multiauthorcommerce.php'. If you dislike any message displayed by the script, simply navigate to this file and make the change.
 
 *If for some reason these installation instructions do not appear normal, please go to: http://www.ravall.com/2010/06/28/wordpress-multiple-user-ad-management-plugin/
 
@@ -50,8 +57,4 @@ This is the first release. No Changelog at the moment.
 
 No upgrades at the moment
 
-== Configuration ==
 
-1. The first thing we need to configure is, the maximum size of custom (image) ads allowed. To do so, open the file, adminpanel.php and edit the variables, `$maximagewidth & $maximageheight`. The default values for these two variables are 152X172. Users will not be able to link to image files that are larger than the maximum restriction set by these two variables.
-   
-2. All the actual outputting is done by 'multiauthorcommerce.php'. If you dislike any message displayed by the script, simply navigate to this file and make the change.
