@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: Manthan
-Donate link: http://www.ravall.com/
+Plugin Homepage: http://www.ravall.com/2010/06/28/wordpress-multiple-user-ad-management-plugin/
 Tags: multiple authors, ad management, ravall, advertisements, banners, php, monitize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
