@@ -1,5 +1,6 @@
 === Plugin Name ===
 Contributors: Manthan
+Donate link: http://sourceforge.net/project/project_donations.php?group_id=331492
 Tags: multiple authors, ad management, ravall, advertisements, banners, php, monitize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
