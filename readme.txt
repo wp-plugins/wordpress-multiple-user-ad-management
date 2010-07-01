@@ -4,7 +4,7 @@ Donate link: http://sourceforge.net/project/project_donations.php?group_id=33149
 Tags: multiple authors, ad management, ravall, advertisements, banners, php, monetize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 The plugin is ideal for blogs with multiple authors and acts as an incentive for making quality posts.
 
@@ -25,8 +25,9 @@ Features:
 Installation
 
 1. Without changing anything (Not even the folder name), place the extracted multiauthor folder into the `/wp-content/plugins/` directory of your WordPress installation.
-2. Login to the administrative panel of the WordPress installation and activate the plugin. At this point in time, a MU Ad management option should appear on the admin navigation bar. This option will be visible to authors on your blog as well.
-3. In order to actually display the ads, we need to call the function: `<?php mu_sidebar(get_the_author_id()); ?>`. Wherever this function is placed, the ad will show. As you may be able to tell, on Ravall.com we have included this function at the bottom of the sidebar.
+2. Ensure that the plugin directory name is `/wordpress-multiple-user-ad-management/`. Changing it to something else may cause issues with the code verification process.
+3. Login to the administrative panel of the WordPress installation and activate the plugin. At this point in time, a MU Ad management option should appear on the admin navigation bar. This option will be visible to authors on your blog as well.
+4. In order to actually display the ads, we need to call the function: `<?php mu_sidebar(get_the_author_id()); ?>`. Wherever this function is placed, the ad will show. As you may be able to tell, on Ravall.com we have included this function at the bottom of the sidebar.
 
 Configuration 
 
@@ -57,12 +58,12 @@ Visit the plugin homepage in order to request new features.
 
 == Changelog ==
 
-= 1.0 =
-*Added GUI interface.
+= 1.01 =
+1. An issue present with the verification process was resolved. The folder name assigned by wordpress and the one the plugin was searching for initially differed.
 
 
 == Upgrade Notice ==
 
-= 1.0 =
-Stable release at the moment. This is the first release of the plugin.
+= 1.01 =
+1. An issue present with the verification process was resolved. The folder name assigned by wordpress and the one the plugin was searching for initially differed. Ensure the plugin directory is named `/wordpress-multiple-user-ad-management/`
 

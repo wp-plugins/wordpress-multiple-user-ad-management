@@ -163,7 +163,7 @@
 			 $mail = "<p>User <b>".$current_user->user_nicename." (".$current_user->user_email.")</b> is requesting activation of the code feature in the MultiUser Ad system Script.</p>";
 		     $mail .= "<br/>If you are confident that this user is trustable, please click on the link below to enable access to the code feature. The user will be able to input his own PHP and HTML code into the website. 
 			          This feature can be misused to direct SQL injection or deface the site. To revoke acess in the future, go to your wordpress database -> user_meta and remove the key 'approval'.";
-			 $mail .= "<br /><br />Click on the following link to activate access: <a href=".$path."/multiauthors/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID."\">".$path."/multiauthors/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID."</a>";
+			 $mail .= "<br /><br />Click on the following link to activate access: <a href=".$path."/wordpress-multiple-user-ad-management/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID.">".$path."/wordpress-multiple-user-ad-management/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID."</a>";
 			 
 			 $headers = "From: $admin_email\r\n"; 
 			 $headers .= "MIME-Version: 1.0\r\n";
