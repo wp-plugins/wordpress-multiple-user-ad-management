@@ -41,7 +41,11 @@ In order to receive assistance from the author of the plugin, feel free to click
 Of course! We plan on expanding and refining this plugin significantly based on the input received by our users. The feedback we receive from you will ultimately shape future releases.
 
 = Am I allowed to modify the code? =
-We encourage modification and redistribution of the code as long as it remains free...
+We encourage modification and redistribution of the code as long as it remains free.
+
+
+= Where can I request new features? =
+Visit the plugin homepage in order to request new features.
 
 == Screenshots ==
 
