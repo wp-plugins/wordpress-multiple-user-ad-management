@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: Manthan
 Donate link: http://sourceforge.net/project/project_donations.php?group_id=331492
-Tags: multiple authors, ad management, ravall, advertisements, banners, php, monitize posts
+Tags: multiple authors, ad management, ravall, advertisements, banners, php, monetize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
 Stable tag: 1.0
@@ -17,7 +17,7 @@ Features:
 
    1. Ability to change advertisement settings through a graphical interface on the fly.
    2. Users can display image ads, input their own <HTML> codes (with admin verification), or accept donations by entering their Paypal account. With respect to image ads, users can also specify a time limit until the advertisement expires.
-   3. As an added layer of security, the plugin will not be seen by users with a subscriber status. Since users with the power to post on your blog are typically trusted, the worry of misuse should be minimized. Despite this, we have sanitized all the inputs besides the Code textarea. To eliminate it’s misuse, the field is disabled until access is granted by an administrator.
+   3. As an added layer of security, the plugin will not be seen by users with a subscriber status. Since users with the power to post on your blog are typically trusted, the worry of misuse should be minimized. Despite this, we have sanitized all the inputs besides the Code textarea. To eliminate it's misuse, the field is disabled until access is granted by an administrator.
 
 
 == Installation ==
