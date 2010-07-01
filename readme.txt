@@ -1,21 +1,24 @@
 === Plugin Name ===
 Contributors: Manthan
+Donate link: http://sourceforge.net/project/project_donations.php?group_id=331492
 Tags: multiple authors, ad management, ravall, advertisements, banners, php, monitize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
 Stable tag: 1.0
 
-The plugin is ideal for blogs with multiple authors and acts as an incentive for making quality posts. 
+The plugin is ideal for blogs with multiple authors and acts as an incentive for making quality posts.
 
 == Description ==
 
 The plugin is ideal for blogs with multiple authors and acts as an incentive for making quality posts. When the add-on is enabled, users will have full control over the advertisements displayed on their own posts. Using a space preallocated by the blog administrator, authors will be able to display various forms of advertisements in addition to accepting Paypal donations. This, in turn will also motivate writers to increase the frequency and quality of posts in order to reach a higher popularity and maximize the ability to monetize. 
+
 
 Features:
 
    1. Ability to change advertisement settings through a graphical interface on the fly.
    2. Users can display image ads, input their own <HTML> codes (with admin verification), or accept donations by entering their Paypal account. With respect to image ads, users can also specify a time limit until the advertisement expires.
    3. As an added layer of security, the plugin will not be seen by users with a subscriber status. Since users with the power to post on your blog are typically trusted, the worry of misuse should be minimized. Despite this, we have sanitized all the inputs besides the Code textarea. To eliminate it’s misuse, the field is disabled until access is granted by an administrator.
+
 
 == Installation ==
 
@@ -32,6 +35,7 @@ Configuration
 
 *If for some reason these installation instructions do not appear normal, please go to: http://www.ravall.com/2010/06/28/wordpress-multiple-user-ad-management-plugin/
 
+
 == Frequently Asked Questions ==
 
 = There is something wrong with my installation. Where can I get help? =
@@ -43,19 +47,22 @@ Of course! We plan on expanding and refining this plugin significantly based on 
 = Am I allowed to modify the code? =
 We encourage modification and redistribution of the code as long as it remains free.
 
-
 = Where can I request new features? =
 Visit the plugin homepage in order to request new features.
 
+
 == Screenshots ==
 
+1. Settings within the administrative panel. This panel will not be available to users with a subscriber status.
 
 == Changelog ==
 
-This is the first release. No Changelog at the moment.
+= 1.0 =
+*Added GUI interface.
+
 
 == Upgrade Notice ==
 
-No upgrades at the moment
-
+= 1.0 =
+Stable release at the moment. This is the first release of the plugin.
 
