@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Multiple Author Ad management
 Plugin URI: http://www.ravall.com/2010/06/28/wordpress-multiple-user-ad-management-plugin/
 Description: On ad-enabled blogs with multiple authors, this plugin allows users to display ads or donate money through paypal on their own posts. This plugin will provide an incentive for approved users to post quality content.
-Version: 1.0
+Version: 1.0.1
 Author: Manthan Raval
 Author URI: http://www.ravall.com
 License: GPL2
