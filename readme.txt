@@ -58,12 +58,12 @@ Visit the plugin homepage in order to request new features.
 
 == Changelog ==
 
-= 1.01 =
+= 1.0.1 =
 1. An issue present with the verification process was resolved. The folder name assigned by wordpress and the one the plugin was searching for initially differed.
 
 
 == Upgrade Notice ==
 
-= 1.01 =
+= 1.0.1 =
 1. An issue present with the verification process was resolved. The folder name assigned by wordpress and the one the plugin was searching for initially differed. Ensure the plugin directory is named `/wordpress-multiple-user-ad-management/`
 
