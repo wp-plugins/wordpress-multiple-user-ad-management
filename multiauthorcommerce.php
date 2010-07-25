@@ -48,11 +48,12 @@ function remove_expired($user,$MDH) {
 }
 
 
-function mu_sidebar($userid=1) {
+function mu_sidebar($userid) {
 
-if (probability(100-get_usermeta(1 ,'ratio')) ) {
+if (probability(100-get_usermeta(1 ,'ratio')) || !is_single() ) {
   $userid = 1;
 }
+
 
  $preference = get_usermeta($userid,'preference');
  $error = "<h4><center> Whoops, the user has not properly setup the ad management system! Although I see a configuration in the database, the settings are blank. </center></h4>";
