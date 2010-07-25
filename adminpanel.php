@@ -3,6 +3,7 @@
    <?php echo "<h3>Wordpress Multi-User ad management Plugin</h3>"; ?>
    
   <p> Are you currently an author on this blog? If so, every post you have submitted has the potential to earn revenue. Simply fill in the fields below to activate <b>your</b> ads on <b>your</b> posts! </p>
+  <p> This probability of your ads getting displayed on your posts is <strong><?php echo 100-get_usermeta(1 ,'ratio')."%"; ?> </strong>
    
    <?php
     //You may edit the code within this php section to make administrative changes to the script.

@@ -13,11 +13,24 @@ function mu_admin() {
   include('adminpanel.php');
 }
 
+function mu_admin_settings() {
+  include('adminonlyconfig.php');
+}
+
 function administrative_options() {  
-   add_menu_page("MU Ad management", "MU Ad management", 2, "MU Ad management", "mu_admin");  
+   add_menu_page("MU Ad management", "Ad Settings", 2, "MU_Ad_management", "mu_admin");  
+   add_submenu_page("MU_Ad_management", "Administrative_Management", "Admin settings", 10, "Administrative_Management", "mu_admin_settings"); 
+	
 }  
 
 add_action('admin_menu', 'administrative_options');  
+
+function probability($chance, $out_of = 100) {
+    $random = mt_rand(1, $out_of);
+    if ($random >= $chance) {
+	  return 1;
+	}
+}
 
 function remove_expired($user,$MDH) {
    $expire_time = get_usermeta($user,'expiry_time');
@@ -37,7 +50,7 @@ function remove_expired($user,$MDH) {
 
 function mu_sidebar($userid=1) {
 
-if($userid == "") {
+if (probability(100-get_usermeta(1 ,'ratio')) ) {
   $userid = 1;
 }
 
