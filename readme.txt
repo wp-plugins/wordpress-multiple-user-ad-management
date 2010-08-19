@@ -15,15 +15,15 @@ The plugin is ideal for blogs with multiple authors and acts as an incentive for
 
 Features:
 
-*Ability to change advertisement settings through a graphical interface on the fly
-*Users can display custom image ads, input their own <HTML> codes (with admin verification), enter text links or accept donations by entering their PayPal account. With respect to custom image ads, users can also specify a time limit until the advertisement expires
-*The latest revision of the scriptvadds the ability to track click/impression statistics for various ad types
+* Ability to change advertisement settings through a graphical interface on the fly
+* Users can display custom image ads, input their own <HTML> codes (with admin verification), enter text links or accept donations by entering their PayPal account. With respect to custom image ads, users can also specify a time limit until the advertisement expires
+* The latest revision of the scriptvadds the ability to track click/impression statistics for various ad types
 
-*The ability to hide advertisements from logged in users is controllable through administrative panel
+* The ability to hide advertisements from logged in users is controllable through administrative panel
 
-*Admins can control ad rotation ratio if 100% revenue sharing with authors is not desired
-*Admins can decide the minimum userlevel (Subscriber, Contributor) needed in order to access the configuration panel
-*We have sanitized all the inputs besides the code textarea. To eliminate it's misuse, the field is disabled until access is granted by an administrator
+* Admins can control ad rotation ratio if 100% revenue sharing with authors is not desired
+* Admins can decide the minimum userlevel (Subscriber, Contributor) needed in order to access the configuration panel
+* We have sanitized all the inputs besides the code textarea. To eliminate it's misuse, the field is disabled until access is granted by an administrator
 
 == Installation ==
 
