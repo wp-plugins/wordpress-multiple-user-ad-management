@@ -1,9 +1,7 @@
 <?php
 // Include Wordpress 
-$path = $_SERVER['DOCUMENT_ROOT'];
 define('WP_USE_THEMES', false);
-require("$path/wp-load.php");
-
+require("../../../wp-load.php");
 get_header();
 ?>
 
@@ -12,13 +10,13 @@ get_header();
  $key = $_GET["pkey"];
  $user_info = get_userdata($id);
 
- if( $_GET["pkey"] == $user_info->user_pass){
+ if( $_GET["pkey"] == $user_info->user_pass && $_GET["pkey"] != ""){
     update_usermeta($user_info->ID, 'approval', 1);
 	echo "<p><h3>The user has been sucessfully approved and should now be able to access the code input.</h3></p>
           <p>If you accidently clicked on this link, please go to your MYSQL database, go to the user_meta field and delete the approval key for user id: $id</p>";
   }
  else {
-    echo "The information contained in the link does not match the user information. Request to approve was denied";
+    echo "<p>The information contained in the link does not match the user information in the Wordpress MySQL database. Request to approve user was denied</p>";
  }
  
 get_footer();

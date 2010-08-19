@@ -1,19 +1,97 @@
+<!-- Javascript for graph -->
+  <script type="text/javascript" src="<?php echo WP_PLUGIN_URL?>/wordpress-multiple-user-ad-management/js/jquery.js"></script>
+  <script type="text/javascript" src="<?php echo WP_PLUGIN_URL?>/wordpress-multiple-user-ad-management/js/jqBarGraph.js"></script>
+
+<!-- Javascript for collapsable Divs -->
+ <script type="text/javascript" src="<?php echo WP_PLUGIN_URL?>/wordpress-multiple-user-ad-management/js/slider/expand.js"></script>
+ <script type="text/javascript">
+          $(function() {
+               $("div.expand").toggler();    
+               $("#wrap").expandAll({trigger: "div.expand", ref: "div.demo", localLinks: "p.top a"});
+             });
+  </script>
+  
+<style type="text/css">
+ #wrap a { 
+   text-decoration: none;
+   font-size: 13px;
+   color: #000;
+   margin-bottom: 15px;
+   }
+ .div {
+   background: #f0f0f0; 
+   width: 525px; 
+   padding: 10px;
+   margin-bottom: 8px;
+ }
+ 
+ /*Sliding Menu Div */
+.expand a {
+  display:block;
+  padding: 4px;
+  width: 534px;
+  color: #000;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.expand a:link, .expand a:visited {
+  border-width:1px;
+  background-image:url(../images/arrow-down.gif);
+  background-repeat:no-repeat;
+  background-position:98% 50%;
+  border: 1px dotted #ccc; 
+}
+
+
+.expand a.open:link, .expand a.open:visited {
+  background: url(../images/arrow-up.gif) no-repeat 98% 50%;
+}
+</style>
 
 <div id="wrap" style="width:600px;">
-   <?php echo "<h3>Wordpress Multi-User ad management Plugin</h3>"; ?>
-   
-  <p> Are you currently an author on this blog? If so, every post you have submitted has the potential to earn revenue. Simply fill in the fields below to activate <b>your</b> ads on <b>your</b> posts! </p>
-  <p> This probability of your ads getting displayed on your posts is <strong><?php echo 100-get_usermeta(1 ,'ratio')."%"; ?> </strong>
    
    <?php
     //You may edit the code within this php section to make administrative changes to the script.
-	$maximagewidth = 152;
-	$maximageheight = 172;
+	$maximagewidth = 250;
+	$maximageheight = 250;
    ?>
    
    <?php 
      global $current_user;
 	 get_currentuserinfo();
+	?>
+	
+	<?php function graph ($user) {
+	 
+	 $impressions = get_usermeta($user,'adimpressions');
+	 $clicks = get_usermeta($user,'adclicks');
+	   if ($impressions ==  '') {
+	    $impressions = 0;
+	   }   
+	   
+	   if ($clicks == '') {
+	    $clicks = 0;
+	   }
+	 echo "
+      <div id='graph'></div>
+       <script>
+          stats = new Array(
+              [$clicks,''],
+		      [$impressions,'']);
+
+          $(\"#graph\").jqBarGraph({
+	          data: stats,
+	          colors: ['#abaaaa','#989797'],
+	          width: 500,
+	          height: 100,
+	          color: '#ffffff',
+	          barSpace: 10,
+	          type: 'simple',
+	          postfix: '',
+	          title: '' }); 
+        </script>";	
+	  }
 	?>
 	
 	<?php
@@ -89,7 +167,7 @@
 	   }
 	 }
 	 ?>
-	
+	 	
 	<?php
      if($_POST['mu_hidden'] == 'Y') {
        echo '<div style="border: 1px dotted #000; width: 525px; padding: 10px; margin-top: 8px; margin-bottom: 8px;">';	 
@@ -135,7 +213,7 @@
 		         update_usermeta($current_user->ID, 'customexpired', $customexpired); 
 			  }
 			  else {
-			     echo '</font><font color="green"> Custom campaign will be set to months by default since no choice has been made.</font><font color="red">';
+			     echo '</font><font color="green"> Custom campaign will be set to months by default since no choice has been made.</font>';
 			     $customexpired = "Months";
 		         update_usermeta($current_user->ID, 'customexpired', $customexpired); 
 			 }
@@ -163,7 +241,7 @@
 		     
 			 $mail = "<p>User <b>".$current_user->user_nicename." (".$current_user->user_email.")</b> is requesting activation of the code feature in the MultiUser Ad system Script.</p>";
 		     $mail .= "<br/>If you are confident that this user is trustable, please click on the link below to enable access to the code feature. The user will be able to input his own PHP and HTML code into the website. 
-			          This feature can be misused to direct SQL injection or deface the site. To revoke acess in the future, go to your wordpress database -> user_meta and remove the key 'approval'.";
+			          This feature can be misused to direct SQL injection or deface the site. To revoke access in the future, go to your wordpress database -> user_meta and remove the key 'approval'.";
 			 $mail .= "<br /><br />Click on the following link to activate access: <a href=".$path."/wordpress-multiple-user-ad-management/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID.">".$path."/wordpress-multiple-user-ad-management/verify.php?pkey=".$current_user->user_pass."&id=".$current_user->ID."</a>";
 			 
 			 $headers = "From: $admin_email\r\n"; 
@@ -179,10 +257,31 @@
 	      update_usermeta($current_user->ID, 'code', $code);  
 		  echo "Code settings have been updated for this account.";
 		}
+	
+	  if($_POST['submit'] == "Clear Statistics") {
+		  update_usermeta($current_user->ID, 'adclicks',0);
+		  update_usermeta($current_user->ID, 'adimpressions',0);
+		  echo "Statistics have been cleared.";
+		}
 		
+	  if($_POST['submit'] == "Update text link settings") {
+	      $texttitle =  strip_tags($_POST['texttitle']);
+	      update_usermeta($current_user->ID, 'texttitle', $texttitle);
+	      echo 'The text link title has been updated. <br />';
+		  if (isValidURL($_POST['textlink']) == 1) {
+		    echo 'The target URL that your text link points to has been updated. <br />';
+		    $textlink = strip_tags($_POST['textlink']); 
+            update_usermeta($current_user->ID, 'textlink', $textlink); 
+		}
+		else {
+		   echo "<b>There is a problem with the url of your text link.</b> <br />";
+		} 
+	  }
+	  echo '</div>';		
 	}
-		echo '</div>';	   
+		   
     ?>  
+    
 	
 	<?php
 	
@@ -194,56 +293,186 @@
 		   $customexpired =  get_usermeta($current_user->ID ,'customexpired');   
 		   $approval = get_usermeta($current_user->ID ,'approval');  
 		   $code = get_usermeta($current_user->ID ,'code');
+		   $textlink = get_usermeta($current_user->ID ,'textlink');
+		   $texttitle = get_usermeta($current_user->ID ,'texttitle');
+		   $default = get_usermeta(1,'default');
 	?>
 	
-
-   <form name="inputform" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-      <input type="hidden" name="mu_hidden" value="Y">
-	  <h3>Current Advertisement Settings for your account</h3>
-	  
-	  <div style="background: #daf7ad; width: 525px; padding: 10px; margin-top: 8px; margin-bottom: 8px;">
-	     <p><label>Email Associated to your paypal (example@yourhost.com):</label><input type="text" name="paypal" value="<?php echo $paypal; ?>" size="70"></p>
-	  </div>
-	  <input type="submit" name="submit" value="Update paypal settings" />
-    </form>
 	
-	<form name="inputform2" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-	 <input type="hidden" name="mu_hidden" value="Y">
-	  <div style="background: #efecc9; width: 525px; padding: 10px; margin-top: 8px; margin-bottom: 8px;">	  
-	     <p><label>Custom Advertisement (http://www.yourhost.com/image.png) (<?php echo $maximagewidth.' X '.$maximageheight;?> max):</label><input type="text" name="custom" value="<?php echo $custom; ?>" size="70"></p>
-	     <p><label>Custom Advertisement links to (http://www.targeturl.com):</label><input type="text" name="customlink" value="<?php echo $customlink; ?>" size="70"></p> 
-		 <p>
-		    <label>Length of Advertising Campaign (Numerical value less than 365):</label><br /> <input type="text" name="customexpire" value="<?php echo $customexpire; ?>" size="3">  
-			 <input type="radio" name="customexpired" value="Hours" <?php if($customexpired == "Hours") { echo "Checked";}?> />  Hours
-			 <input type="radio" name="customexpired" value="Days" <?php if($customexpired == "Days") { echo "Checked";}?> /> Days
-			 <input type="radio" name="customexpired" value="Months" <?php if($customexpired == "Months") { echo "Checked";}?> /> Months
-	     </p> 
-	   <div style="width: 100%; background: #faf8e0;">	 
-	      <p><center><?php if ($custom != "") { echo '<img src="'.$custom.'" alt="If you are seeing this, your Custom URL is not pointing to the correct image!" />'; }?></center>
-	   </div>
-	 </div>  
-	    <input type="submit" name="submit" value="Update custom ad settings" />
-  </form>	
+  <?php echo "<h3>Wordpress Multi-User ad management Plugin</h3>"; ?>
+   
+  <p> 
+   Are you currently an author on this blog? If so, every post you have submitted has the potential to earn revenue. Simply fill in the fields 
+   below to activate <b>your</b> ads on <b>your</b> posts! 
+  </p>
   
-  <form name="inputform2" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
-	 <input type="hidden" name="mu_hidden" value="Y">
-	  <div style="background: #efecc9; width: 525px; padding: 10px; margin-top: 8px; margin-bottom: 8px;">	  
-	     <p><label>Your own Code (For items such as adsense):</label></p>
-	     <textarea rows="10" cols="69" name="code" <?php if($approval == "" || $approval != 1) { echo 'style="background: #eaeaea;" disabled';}?>><?php print $code;?></textarea>
-		 <p><i> In order to activate this feature, you must be approved by the administrator. Approval is needed as, this feature passes unsanitized code to the MySql database.</i></p>
+  <p>
+   <?php
+    if ($current_user->ID == $default) {
+      echo "You are the <font color='green'>default</font> user and thus, your ads will be displayed <strong>100%</strong> of the time on your posts";
+    }
+    else{
+      $probability = 100-get_usermeta(1 ,'ratio');
+      echo "The probability of your ads getting displayed on your posts is <strong>".$probability."% </strong>";
+    }
+   ?>
+  
+  </p>
+	
+    <div style="background: #f0f0f0; padding: 12px; width: 522px;">
+     <h3>Clicks Vs. Impressions Graph</h3>
+      <div style="margin-bottom: 15px;">
+         The graph below depicts the number of clicks and impressions your advertisements have received.
+         <strong>Click count is only enabled for custom image and text link type advertisements</strong>. The number of 
+         impressions your advertisements receive will still be tracked regardless of the advertisement type. <font color="red">The 
+         statistics will clear when you press the clear now button</font>
+      </div>
+      <div style=" border-left: 1px solid #707070; border-bottom: 1px solid #707070; width: 520px;">
+        <?php graph($current_user->ID); ?> 
+      </div>
+     </div>
+   
+   <form name="inputform3" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+       <input type="hidden" name="mu_hidden" value="Y">
+	   <input type="submit" name="submit" value="Clear Statistics" style="margin-bottom: 8px; margin-top: 8px;" />
+	</form>
+ 
+  <div class="demo">
+	
+   <h3>Current Advertisement Settings for your account</h3>
+	
+   <div class="expand">Advertisement Type 1: Custom Image Advertisement (Click Tracking <font color="green">Enabled</font>)</div>
+   <div class="collapse">
+     <form name="inputform2" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+	   <input type="hidden" name="mu_hidden" value="Y">
+	   <div class="div">	  
+	     <p>
+	      <label>
+	       Custom Advertisement (http://www.yourhost.com/image.png) (<?php echo $maximagewidth.' X '.$maximageheight;?> max):
+	      </label> 
+	      <input type="text" name="custom" value="<?php echo $custom; ?>" size="50">
+	     </p>
+	     <p>
+	      <label>
+	        Custom Advertisement links to (http://www.targeturl.com):
+	      </label>
+	      <input type="text" name="customlink" value="<?php echo $customlink; ?>" size="50">
+	     </p> 
+		 <p>
+		   <label>
+		     Length of Advertising Campaign:
+		   </label>
+		  
+		   <input type="text" name="customexpire" value="<?php echo $customexpire; ?>" size="3">  
+		   <input type="radio" name="customexpired" value="Hours" <?php if($customexpired == "Hours") { echo "Checked";}?> />  Hours
+		   <input type="radio" name="customexpired" value="Days" <?php if($customexpired == "Days") { echo "Checked";}?> /> Days
+		   <input type="radio" name="customexpired" value="Months" <?php if($customexpired == "Months") { echo "Checked";}?> /> Months
+		   
+		   <p>
+		     If you do not wish to set an expiration date, leave the fields below blank or enter a value of zero.
+		     Otherwise, ensure the value input into the field above is less than or equal to 365
+		   </p>
+	     </p> 
+	     <div style="width: 100%;">	 
+	      <p>
+	        <center>
+	          <?php 
+	            if ($custom != "") { 
+	               echo '<img src="'.$custom.'" alt="If you are seeing this, your Custom URL is not pointing to the correct image!" />'; }
+	          ?>
+	        </center>
+	     </div>
+	   </div>  
+	   <input type="submit" name="submit" value="Update custom ad settings" style="margin-bottom: 8px" />
+     </form>	
+    </div>
+  
+  
+   <div class="expand">Advertisement Type 2: Simple text link (Click Tracking <font color="green">Enabled</font>)</div>
+   <div class="collapse">
+     <form name="inputform4" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+         <input type="hidden" name="mu_hidden" value="Y">
+	     <div class="div">
+	        <p>
+	          <label>
+	            Text link title (My Text Link):
+	          </label>
+	          <br />
+	          <input type="text" name="texttitle" value="<?php echo $texttitle; ?>" size="50" />
+	        </p>
+	        <p>
+	          <label>
+	            Url of textlink (http://www.targeturl.com):
+	          </label>
+	          <br />
+	          <input type="text" name="textlink" value="<?php echo $textlink; ?>" size="50">
+	        </p>
+	    </div>
+	    <input type="submit" name="submit" value="Update text link settings" style="margin-bottom: 8px;" />
+    </form>
+   </div>
+  
+  <div class="expand">Advertisement Type 3: Paypal Donations Button (Click Tracking <font color="red">Disabled</font>)</div>
+  <div class="collapse">
+   <form name="inputform" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+      <input type="hidden" name="mu_hidden" value="Y" />  
+	  <div class="div">
+	     <p>
+	       <label>
+	          Email Associated to your paypal for donations (example@yourhost.com):
+	       </label>
+	       <input type="text" name="paypal" value="<?php echo $paypal; ?>" size="50" />
+	     </p>
+	  </div>
+	  <input type="submit" name="submit" value="Update paypal settings" style="margin-bottom: 8px;" />
+   </form>
+  </div>
+  
+  <div class="expand">Advertisement Type 4: Adsense Code (Click Tracking <font color="red">Disabled</font>)</div>
+  <div class="collapse">
+      <form name="inputform2" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
+	  <input type="hidden" name="mu_hidden" value="Y">
+	  <div class="div">	  
+	     <p>
+	      <label>
+	        Your own Code (For items such as Adsense):
+	      </label>
+	     </p>
+	     <textarea rows="10" cols="59" name="code" <?php if($approval == "" || $approval != 1) { echo 'style="background: #eaeaea;" disabled';}?>>
+	       <?php print $code;?>
+	     </textarea>
+		 <p>
+		   <i> 
+		       In order to activate this feature, you must be approved by the administrator. Approval is needed as, this feature passes 
+		       unsanitized code to the MySql database.
+		   </i>
+		 </p>
 	 </div>  
-	    <?php if($approval == "") { echo '<input type="submit" name="submit" value="Request approval" />';} elseif($approval == 1) {echo '<input type="submit" name="submit" value="Update code settings" />';} else { echo '<input type="submit" name="submit" value="Pending approval" disabled style="background:#eaeaea "/>';}?>
-  </form>	
+	    <?php 
+	     if($approval == "") {
+	       echo '<input type="submit" name="submit" value="Request approval" />';}
+	       elseif($approval == 1) {echo '<input type="submit" name="submit" value="Update code settings" />';} 
+	       else { echo '<input type="submit" name="submit" value="Pending approval" disabled style="background:#eaeaea "/>';}
+	    ?>
+  </form>
+ </div>	
+    
 
   <form name="inputform2" method="post" action="<?php echo str_replace( '%7E', '~', $_SERVER['REQUEST_URI']); ?>">
     <input type="hidden" name="mu_hidden" value="Y">
-	   <p><label>Which setting do you prefer?</label> 
-	        <input type="radio" name="preference" value="Paypal" <?php if($preference == "Paypal") { echo "Checked";}?> /> Paypal
-	        <input type="radio" name="preference" value="Custom" <?php if($preference == "Custom") { echo "Checked";}?> /> Custom
-			<input type="radio" name="preference" value="Code"  <?php if($preference == "Code") { echo "Checked";} if($approval == "" || $approval != 1) {echo "disabled";}?> /> Code
-			<input type="radio" name="preference" value="Disable" <?php if($preference == "Disable") { echo "Checked";}?> /> Disable
-	   <br /><input type="submit" name="submit" value="Update Preference settings" style="margin-top:8px;" />
+	   <p>
+	     <label>Which setting do you prefer?</label> 
+	     <input type="radio" name="preference" value="Paypal" <?php if($preference == "Paypal") { echo "Checked";}?> /> Paypal
+	     <input type="radio" name="preference" value="Custom" <?php if($preference == "Custom") { echo "Checked";}?> /> Custom Image Ads
+	     <input type="radio" name="preference" value="Code"  <?php if($preference == "Code") { echo "Checked";} if($approval == "" || $approval != 1) {echo "disabled";}?> /> Code
+	     <input type="radio" name="preference" value="Textlink"  <?php if($preference == "Textlink") { echo "Checked";}?> /> Textlink
+		 <input type="radio" name="preference" value="Disable" <?php if($preference == "Disable") { echo "Checked";}?> /> Disable
+	     <br />
+	     <input type="submit" name="submit" value="Update Preference settings" style="margin-top:8px;" />
+	   </p>
 	</form>
 	
+ </div>	
 </div>
+
    
