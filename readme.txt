@@ -72,8 +72,6 @@ Visit the plugin homepage in order to request new features.
 
 
 
-2. Administrative settings. Only visible to users who have a Administrator Role.
-
 == Changelog ==
 
 = 1.0.1 =
@@ -84,11 +82,16 @@ As requested by many, added the ability to set a percentage value in order to ro
 
 
 = 1.0.3 =
-Click/Impressions tracking for various ad types has been enabled. Fixed an issue with verify.php that individuals on a subdirectory were experiencing.
-UI changes have been made. 
+Click/Impressions tracking for various ad types has been enabled. 
+Fixed an issue with verify.php that individuals on a subdirectory were experiencing.
+UI changes have been made.
+
 The ability to display text links has been added. One issue with mu_sidebar() function has been resolved. 
+
 The ability to hide advertisements from registered users has been added.
+
 Error messages have been replaced with the ability to display a default user ad.
+
 The ability to decide the default advertisement user has been added.
 The ability to choose the minimum userlevel needed to display ads has been added.
 
