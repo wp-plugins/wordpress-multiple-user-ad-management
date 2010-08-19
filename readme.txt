@@ -22,7 +22,7 @@ Features:
    4. The ability to hide advertisements from logged in users is controllable through administrative panel
    
    5. Admins can control ad rotation ratio if 100% revenue sharing with authors is not desired
-   6. Admins can decide the minimum userlevel (Subscriber, Contributor…) needed in order to access the configuration panel
+   6. Admins can decide the minimum userlevel (Subscriber, Contributor) needed in order to access the configuration panel
    7. We have sanitized all the inputs besides the code textarea. To eliminate it's misuse, the field is disabled until access is granted by an administrator.
 
 == Installation ==
