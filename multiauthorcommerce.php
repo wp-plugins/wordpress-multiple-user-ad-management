@@ -3,7 +3,7 @@
 Plugin Name: Wordpress Multiple Author Ad management
 Plugin URI: http://www.ravall.com/2010/06/28/wordpress-multiple-user-ad-management-plugin/
 Description: On ad-enabled blogs with multiple authors, this plugin allows users to display ads or donate money through paypal on their own posts. This plugin will provide an incentive for approved users to post quality content.
-Version: 1.0.3
+Version: 1.0.4
 Author: Manthan Raval
 Author URI: http://www.ravall.com
 License: GPL2
@@ -19,13 +19,35 @@ function mu_admin_settings() {
 
 function administrative_options() {  
    $capabilities = get_usermeta(1,'capabilities');
-   if ($capabilities == '') {
+   $legacy = get_usermeta(1,'mu_legacy');
+   if ($capabilities == '' && $legacy == "") {
     $capabilities = "delete_published_posts";
    }
+   elseif ($capabilities == '' && $legacy == "Yes") {
+    $capabilities = 1;
+   }
+   elseif ($capabilities != '' && $legacy == "Yes")
+   {
+     switch ($capabilities) {
+	  case 'delete_posts':
+	    $capabilities = 1; 
+	     break;
+	  case 'delete_published_posts':
+	    $capabilities = 2; 
+	     break;
+	  case 'read_private_pages':
+	    $capabilities = 5; 
+	     break;
+	  case 'edit_dashboard':
+	    $capabilities = 8; 
+	     break;
+     }
+   }
+   
    add_menu_page("MU Ad management", "Ad Settings",$capabilities, "MU_Ad_management", "mu_admin");  
    add_submenu_page("MU_Ad_management", "Administrative_Management", "Admin settings",'manage_options', "Administrative_Management", "mu_admin_settings"); 
 	
-}  
+} 
 
 //This function is used to record the number of impressions an ad recieves
 function mu_impressions($user) {
@@ -92,6 +114,10 @@ if (probability(100-get_usermeta(1 ,'ratio')) || is_home() ) {
    $preference = get_usermeta($userid,'preference');  
  }
  
+ if ($preference == "Disable" && $userid == userid()) {
+   return 0;
+ }
+ 
  print "<!-- Wordpress Ad Management Plugin by Ravall.com  --> \n"; 
  if ($preference == "Paypal") {
     $paypal = get_usermeta($userid,'paypal');
@@ -148,8 +174,7 @@ if (probability(100-get_usermeta(1 ,'ratio')) || is_home() ) {
   
   if($error == 1 && $userid != userid()) {
    //Yo dawg, we heard you like PHP so we put a mu_sidebar function inside your mu_sidebar function!
-    echo "oh hell no";
-    mu_sidebar($userid);
+   mu_sidebar($userid);
     
   }
   elseif ($error == 1) {

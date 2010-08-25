@@ -40,6 +40,12 @@
 	 $removeads = $_POST['removeads'];
      update_usermeta(1, 'removeads' ,$removeads);
 	}
+   
+   if(isset($_POST['legacy'])) {
+      $legacy = $_POST['legacy'];
+      update_usermeta(1,'mu_legacy',$legacy);
+    }
+   
   }
   
  ?>
@@ -57,7 +63,8 @@
 	    $default = 1;
 	  }
 	
-	$removeads = get_usermeta(1, 'removeads' ,$removeads);
+	$removeads = get_usermeta(1, 'removeads');
+	$legacy = get_usermeta(1,'mu_legacy');
  ?>
 
  
@@ -79,9 +86,19 @@
      </select>
 	  <br />
       The ad management settings will only be displayed to users who meet the minimum role requirement. For example, if the 'Authors and 
-      above' option is chosen, contributors will not be able to access the ad management panel. 
+      above' option is chosen, contributors will not be able to access the ad management panel.
    </p>
    
+    <p style="border: 1px solid; background: #fff; padding: 5px;">
+      <label><b>Enable Legacy Mode:</b> </label>
+      <input type="radio" name="legacy" value="Yes" <?php if($legacy == "Yes") { echo "Checked";}?> /> Yes
+	  <input type="radio" name="legacy" value="" <?php if($legacy == "") { echo "Checked";}?> /> No	
+	  <br />
+	  If users are unable to view the ad management settings from the navigation bar, you may need to enable legacy 
+	  mode. Instead of using Wordpress capabilities, the plugin will make use of Wordpress Roles (ex. Subscribers = 1, Administrators = 
+	  10).
+    </p>
+    
     <p>
      <label><b>Default advertisement user id:  </b> </label><input type="text" name="default" value="<?php echo $default;?>" size="3" maxlength="8" >
 	  <br />
@@ -99,7 +116,7 @@
       the site.
    </p>
        
-   <input type="submit" name="submit" value="Update Administrative settings" />
+   <input type="submit" name="submit" value="Update Administrative settings"  />
  </form>
  
  

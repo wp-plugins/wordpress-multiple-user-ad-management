@@ -4,7 +4,7 @@ Donate link: http://sourceforge.net/project/project_donations.php?group_id=33149
 Tags: multiple authors, ad management, ravall, advertisements, banners, php, monetize posts
 Requires at least: 2.0.2
 Tested up to: 3.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 
 The plugin is ideal for blogs with multiple authors and acts as an incentive for making quality posts.
 
@@ -17,10 +17,8 @@ Features:
 
 * Ability to change advertisement settings through a graphical interface on the fly
 * Users can display custom image ads, input their own <HTML> codes (with admin verification), enter text links or accept donations by entering their PayPal account. With respect to custom image ads, users can also specify a time limit until the advertisement expires
-* The latest revision of the scriptvadds the ability to track click/impression statistics for various ad types
-
+* The latest revision of the script adds the ability to track click/impression statistics for various ad types
 * The ability to hide advertisements from logged in users is controllable through administrative panel
-
 * Admins can control ad rotation ratio if 100% revenue sharing with authors is not desired
 * Admins can decide the minimum userlevel (Subscriber, Contributor) needed in order to access the configuration panel
 * We have sanitized all the inputs besides the code textarea. To eliminate it's misuse, the field is disabled until access is granted by an administrator
@@ -58,18 +56,13 @@ We encourage modification and redistribution of the code as long as it remains f
 = Where can I request new features? =
 Visit the plugin homepage in order to request new features.
 
-
-
 = The plugin only displays advertisements from the Default Admin account! =
-
 99% of the time this occurs as, `get_the_author_id()` Wordpress function is transferring a value of `0` to `mu_sidebar()`. In order to fix this, relocate the `<?php mu_sidebar(get_the_author_id()); ?>` after the Wordpress loop. Additionally, you may ` replace get_the_author_id()`  with another function that inputs a userid value.
 
 
 == Screenshots ==
 
 1. Settings within the administrative panel. This panel will be hidden from users below the minimum role threshold.
-
-
 
 == Changelog ==
 
@@ -79,22 +72,18 @@ An issue present with the verification process was resolved. The folder name ass
 = 1.0.2 =
 As requested by many, added the ability to set a percentage value in order to rotate between your ads and the author of the post's ads.
 
-
 = 1.0.3 =
 Click/Impressions tracking for various ad types has been enabled. 
 Fixed an issue with verify.php that individuals on a subdirectory were experiencing.
 UI changes have been made.
-
 The ability to display text links has been added. One issue with mu_sidebar() function has been resolved. 
-
 The ability to hide advertisements from registered users has been added.
-
 Error messages have been replaced with the ability to display a default user ad.
-
 The ability to decide the default advertisement user has been added.
 The ability to choose the minimum userlevel needed to display ads has been added.
 
-
+= 1.0.4 =
+Fixed some minor bugs related to user permissions. Enable legacy mode if users cannot see ad management configuration panel
 
 == Upgrade Notice ==
 
@@ -104,8 +93,8 @@ An issue present with the verification process was resolved. The folder name ass
 = 1.0.2 =
 New feature added as promised. The ability to rotate between your ads and author of the posts ads has been added.
 
-
-
 = 1.0.3 =
-
 Numerous significant changes and fixes have been made to the plugin. Refer to the Changelog for more information.
+
+= 1.0.4 =
+Fixed some minor bugs related to user permissions. Enable legacy mode if users cannot see ad management configuration panel
