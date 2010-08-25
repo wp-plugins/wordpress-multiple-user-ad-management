@@ -64,6 +64,10 @@ Visit the plugin homepage in order to request new features.
 
 1. Settings within the administrative panel. This panel will be hidden from users below the minimum role threshold.
 
+
+2. Admin configurations panel. 
+
+
 == Changelog ==
 
 = 1.0.1 =
